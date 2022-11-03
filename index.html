@@ -29,17 +29,33 @@
             });
         }
 
+        function readFile(event) {
+            let file = event.target.files[0];
+
+            let href = window.URL.createObjectURL(file)
+            $("#profile-img").val( href);
+            $("#img").attr('src', href);
+
+            //5분뒤에 메모리 해제
+            setTimeout(function () {
+                window.URL.revokeObjectURL(href)
+            }, 1000 * 60 * 5)
+        }
+
     </script>
 </head>
 <body>
 <div class="container">
     <div class="form-group">
         <label for="comment">Message</label>
-        <textarea class="form-control" rows="5" id="comment" placeholder="보낼 내용을 입력해주세요. "></textarea>
+        <textarea class="form-control" rows="5" id="comment" placeholder="보낼 내용을 입력해주세요. 200자 이하만 가능합니다. "></textarea>
     </div>
 
     <button type="button" class="btn btn-primary" onclick=clear();>다시쓰기</button>
     <button type="button" class="btn btn-primary" onclick=shareMessage();>공유하기</button>
+    <input type="file" class="btn btn-success" id="file" onchange="readFile(event);" value="이미지 올리기">(2MB 이하 이미지만 가능)
+    <input type="hidden" id="profile-img">
+    <img id = "img" src="" width="150px" height="150px" alt="img">
     <br><br>
     <div align="center">
         Made by Dante Inc.<br>
