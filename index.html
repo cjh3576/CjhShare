@@ -1,4 +1,3 @@
-
 <html>
 <head>
     <title>공유하기</title>
@@ -17,20 +16,18 @@
         Kakao.init('5737b54fb7e10d6dc8fc4f0875bab4c3'); // 사용하려는 앱의 JavaScript 키 입력
     </script>
     <script type="text/javascript">
-            function shareMessage() {
-                let comment = $("#comment").val();
-                Kakao.Share.sendCustom({ //85269 내꺼 82775 카톡꺼
-                    templateId: 85269,
-                    templateArgs: {
-                        templateArgs: "공유하기",
-                        description: comment,
-                    },
-                });
-            }
-            function clear(){
-                alert($("#comment").val());
-                $("#comment").val('');
-            }
+        function shareMessage() {
+            let comment = $("#comment").val();
+            Kakao.Share.sendDefault({
+                objectType: 'text',
+                text:
+                comment,
+                link: {
+                    mobileWebUrl: 'https://danteshare.netlify.app/',
+                    webUrl: 'https://danteshare.netlify.app/',
+                },
+            });
+        }
 
     </script>
 </head>
