@@ -1,11 +1,4 @@
-<%--
-Created by IntelliJ IDEA.
-User: jaehyuk
-Date: 2022-11-01
-Time: 오후 10:26
-To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>공유하기</title>
@@ -23,17 +16,24 @@ To change this template use File | Settings | File Templates.
     <script>
         Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
     </script>
-    <script>
-        function shareMessage() {
-            let comment = $("#comment").val();
-            Kakao.Share.sendCustom({
-                templateId: 82775,
-                templateArgs: {
+    <script type="text/javascript">
+        $(function(){
+            function shareMessage() {
+                let comment = $("#comment").val();
+                Kakao.Share.sendCustom({
+                    templateId: 82775,
+                    templateArgs: {
 
-                    description: comment,
-                },
-            });
-        }
+                        description: comment,
+                    },
+                });
+            }
+            function clear(){
+                alert($("#comment").val());
+                $("#comment").val('');
+            }
+        });
+
     </script>
 </head>
 <body>
@@ -42,6 +42,7 @@ To change this template use File | Settings | File Templates.
         <label for="comment">Message</label>
         <textarea class="form-control" rows="5" id="comment" placeholder="보낼 내용을 입력해주세요. "></textarea>
     </div>
+    <button type="button" class="btn btn-primary" onclick=clear();>다시쓰기</button>
     <button type="button" class="btn btn-primary" onclick=shareMessage();>공유하기</button>
 </div>
 </body>

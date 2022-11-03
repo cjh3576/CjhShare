@@ -16,17 +16,22 @@
     <script>
         Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
     </script>
-    <script>
-        function shareMessage() {
-            let comment = $("#comment").val();
-            Kakao.Share.sendCustom({
-                templateId: 82775,
-                templateArgs: {
+    <script type="text/javascript">
+            function shareMessage() {
+                let comment = $("#comment").val();
+                Kakao.Share.sendCustom({ //85269 내꺼 82775 카톡꺼
+                    templateId: 85269,
+                    templateArgs: {
+                        templateArgs: "공유하기",
+                        description: comment,
+                    },
+                });
+            }
+            function clear(){
+                alert($("#comment").val());
+                $("#comment").val('');
+            }
 
-                    description: comment,
-                },
-            });
-        }
     </script>
 </head>
 <body>
@@ -35,7 +40,14 @@
         <label for="comment">Message</label>
         <textarea class="form-control" rows="5" id="comment" placeholder="보낼 내용을 입력해주세요. "></textarea>
     </div>
+
+    <button type="button" class="btn btn-primary" onclick=clear();>다시쓰기</button>
     <button type="button" class="btn btn-primary" onclick=shareMessage();>공유하기</button>
+    <br><br>
+    <div align="center">
+        Made by Dante Inc.<br>
+        cjh3576@naver.com<br>
+    </div>
 </div>
 </body>
 </html>
