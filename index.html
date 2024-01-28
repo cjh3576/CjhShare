@@ -72,6 +72,11 @@
             $('#reWrite').click(function() {
                $('#comment').val('');
             });
+
+            $('#comment').on('keyup, paste', function () {
+               let count = $(this).val().length;
+               $('#textLen').val(count);
+            });
         });
 
         function readFile(event) {
@@ -95,7 +100,7 @@
         <label for="comment">Message</label>
         <textarea class="form-control" rows="5" id="comment" placeholder="보낼 내용을 입력해주세요. 200자 이하만 가능합니다. "></textarea>
     </div>
-
+    <div><label><input id="textLen" readonly></label></div>
     <button type="button" class="btn btn-primary" id="reWrite" >다시쓰기</button>
     <button type="button" class="btn btn-primary" id = "share" >공유하기</button>
     <input type="file" class="btn btn-success" id="file"  value="이미지 올리기">(2MB 이하 이미지만 가능)
