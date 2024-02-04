@@ -25,8 +25,8 @@
             $("#share").click(function(){
                 let comment = $("#comment").val();
 
-                let imageUrl =document.getElementById('input-file').files ?? '';
-                //let imageUrl = '';
+                //let imageUrl =document.getElementById('input-file').files ?? '';
+                let imageUrl = '';
 
                 if(imageUrl.length > 0){ <!--이미지가 있을 때 -->
                     Kakao.Share.uploadImage({
