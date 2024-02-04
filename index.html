@@ -16,30 +16,39 @@
         Kakao.init('5737b54fb7e10d6dc8fc4f0875bab4c3'); // 사용하려는 앱의 JavaScript 키 입력
     </script>
     <script type="text/javascript">
+        let files;
         $(function(){
-            let files;
             $("#reWrite").click(function(){
                 $("#comment").val('');
             });
 
-            $("#share").click(function(imageUrl){
+            $("#share").click(function(){
                 let comment = $("#comment").val();
-                let url = "";
+
+                let imageUrl = files;
+
 
                 if(imageUrl.length > 0){ <!--이미지가 있을 때 -->
-                    url = imageUrl;
-                    Kakao.Share.sendDefault({
-                       objectType: "feed",
-                       text : comment,
-                        content : {
-                           title : "",
-                            imageUrl : url,
-                            link: {
-                                mobileWebUrl: url,
-                                webUrl: url,
+                    Kakao.Link.uploadImage({
+                       file : imageUrl,
+                    }).then((res) => {
+                        let url = res.infos.original.url;
+                        Kakao.Share.sendDefault({
+
+                            objectType: "feed",
+                            text : comment,
+                            content : {
+                                title : "",
+                                imageUrl : url,
+                                link: {
+                                    mobileWebUrl: url,
+                                    webUrl: url,
+                                },
                             },
-                        },
+                        });
                     });
+
+
                 } else { <!-- 이미지 없을 때 -->
 
                     Kakao.Share.sendDefault({
@@ -53,12 +62,13 @@
                     });
 
                 }
+                $('#comment').val('');
             });
 
-            $("#file").change(function(){
-                let file = event.target.files[0];
+            $("#file").change(function(e){
+                files = e.target.files[0];
 
-                let href = window.URL.createObjectURL(file)
+                let href = window.URL.createObjectURL(files)
                 $("#profile-img").val(href);
 
                 $("#img").attr('src', href);
@@ -73,25 +83,11 @@
                $('#comment').val('');
             });
 
-            $('#comment').on('keyup, paste', function () {
+            $('#comment').on('keyup paste change', function () {
                let count = $(this).val().length;
                $('#textLen').val(count);
             });
         });
-
-        function readFile(event) {
-            let file = event.target.files[0];
-
-            let href = window.URL.createObjectURL(file)
-            $("#profile-img").val( href);
-            $("#img").attr('src', href);
-
-            //5분뒤에 메모리 해제
-            setTimeout(function () {
-                window.URL.revokeObjectURL(href)
-            }, 1000 * 60 * 5)
-        }
-
     </script>
 </head>
 <body>
