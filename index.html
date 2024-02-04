@@ -25,7 +25,7 @@
             $("#share").click(function(){
                 let comment = $("#comment").val();
 
-                let imageUrl = files ?? '';
+                let imageUrl =document.getElementById('input-file').files ?? '';
 
 
                 if(imageUrl.length > 0){ <!--이미지가 있을 때 -->
