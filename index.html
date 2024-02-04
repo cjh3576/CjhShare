@@ -16,19 +16,15 @@
         Kakao.init('5737b54fb7e10d6dc8fc4f0875bab4c3'); // 사용하려는 앱의 JavaScript 키 입력
     </script>
     <script type="text/javascript">
-        let files;
         $(function(){
+            let files;
             $("#reWrite").click(function(){
                 $("#comment").val('');
             });
 
-            $("#share").click(function(){
+            $("#share").click(function(imageUrl){
                 let comment = $("#comment").val();
                 let url = "";
-
-                //let imageUrl = files;
-                let imageUrl = '';
-
 
                 if(imageUrl.length > 0){ <!--이미지가 있을 때 -->
                     url = imageUrl;
@@ -60,10 +56,10 @@
                 $('#comment').val('');
             });
 
-            $("#file").change(function(e){
-                files = e.target.files[0];
+            $("#file").change(function(){
+                let file = event.target.files[0];
 
-                let href = window.URL.createObjectURL(files)
+                let href = window.URL.createObjectURL(file)
                 $("#profile-img").val(href);
 
                 $("#img").attr('src', href);
@@ -83,6 +79,20 @@
                $('#textLen').val(count);
             });
         });
+
+        function readFile(event) {
+            let file = event.target.files[0];
+
+            let href = window.URL.createObjectURL(file)
+            $("#profile-img").val( href);
+            $("#img").attr('src', href);
+
+            //5분뒤에 메모리 해제
+            setTimeout(function () {
+                window.URL.revokeObjectURL(href)
+            }, 1000 * 60 * 5)
+        }
+
     </script>
 </head>
 <body>
