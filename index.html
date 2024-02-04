@@ -25,11 +25,11 @@
             $("#share").click(function(){
                 let comment = $("#comment").val();
 
-                //let imageUrl =document.getElementById('input-file').files ?? '';
+                //let imageUrl = files ?? '';
                 let imageUrl = '';
 
                 if(imageUrl.length > 0){ <!--이미지가 있을 때 -->
-                    Kakao.Share.uploadImage({
+                    Kakao.Link.uploadImage({
                        file : imageUrl,
                     }).then((res) => {
                         let url = res.infos.original.url;
