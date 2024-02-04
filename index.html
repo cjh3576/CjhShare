@@ -83,7 +83,7 @@
                $('#comment').val('');
             });
 
-            $('#comment').on('keyup paste change', function () {
+            $('#comment').on('input', function () {
                let count = $(this).val().length;
                $('#textLen').val(count);
             });
